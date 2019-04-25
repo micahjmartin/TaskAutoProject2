@@ -5,7 +5,6 @@ def filter():
     for i in range(1, 5):
         filter_text_file("data/Node" + str(i) + ".txt")
 
-
 def filter_text_file(filename):
     name, ext = filename.split(".")
     with open(name + "_filtered." + ext, 'w') as outfile:
@@ -28,5 +27,4 @@ def filter_text_file(filename):
                         break
                 if protocol == "ICMP":
                     outfile.write(data+"\n")
-
 
