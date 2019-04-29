@@ -59,8 +59,8 @@ def computeNode(node, packets):
     AverageReplyDelay = totalTimeResponse / EchoRequestsRec * 1000000
 
     # Hops / Distance Metrics
-    numOfHops = 0
-    count = 0
+    numOfHops = float(0)
+    count = float(0)
     for packet in packets:
         if packet.isRequest():
             count += 1
@@ -70,10 +70,10 @@ def computeNode(node, packets):
 
             # If the source node is the same as us, we sent it
             if packet.getSrcNode() == node:
-                numOfHops += ( 128 - int(ttl[1]) + 1)
+                numOfHops += float( 128 - float(ttl[1]) + 1)
             # If the dest node is us, we received it
             if packet.getDstNode() == node:
-                numOfHops += ( 128 - int(ttl[1]) + 3)
+                numOfHops += float( 128 - float(ttl[1]) + 3)
             
     ave = float( numOfHops / count )
     print str(numOfHops) + " , \t" + str(ave)
