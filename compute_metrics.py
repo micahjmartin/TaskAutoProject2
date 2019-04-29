@@ -67,7 +67,14 @@ def computeNode(node, packets):
             tmp = packet.info.split(',')
             tmp2 = tmp[2].split(' ')
             ttl = tmp2[1].split("=")
-            numOfHops += ( 128 - int(ttl[1]) )
+
+            # If the source node is the same as us, we sent it
+            if packet.getSrcNode() == node:
+                numOfHops += ( 128 - int(ttl[1]) + 1)
+            # If the dest node is us, we received it
+            if packet.getDstNode() == node:
+                numOfHops += ( 128 - int(ttl[1]) + 3)
+            
     ave = float( numOfHops / count )
     print str(numOfHops) + " , \t" + str(ave)
 
