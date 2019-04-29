@@ -43,4 +43,20 @@ def computeNode(node, packets):
     EchoRequestDataSent = sum([p.length for p in RequestSent])
     EchoRequestDataRec = sum([p.length for p in RequestRec])
 
+    totalTime = 0
+    for i in range(0, EchoRequestsSent):
+        totalTime += ReplyRec[i].time - RequestSent[i].time
+
+    AveragePingRTT = totalTime / EchoRequestsSent * 1000
+    EchoRequestThroughput = EchoRequestBytesSent / totalTime / 1000
+    EchoRequestGoodput = EchoRequestDataSent / totalTime / 1000
+
+
+    totalTimeResponse = 0
+    for i in range(0, EchoRequestsRec):
+        totalTimeResponse += ReplySent[i].time - RequestRec[i].time
+
+    AverageReplyDelay = totalTimeResponse / EchoRequestsRec * 1000000
+
+
     # TODO: Print out the metrics and calcuate the rest of them
