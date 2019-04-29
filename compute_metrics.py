@@ -95,6 +95,6 @@ def computeNode(node, packets):
             #    numOfHops += float( 128 - float(ttl[1]) + 3)
             
     ave = float( numOfHops / count )
-    print str(numOfHops) + " , " + str(ave)
+    print str(numOfHops) + " , " + str( round(ave, 2) )
 
     # TODO: Print out the metrics and calcuate the rest of them
