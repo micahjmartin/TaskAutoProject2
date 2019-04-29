@@ -85,15 +85,8 @@ def computeNode(node, packets):
 
             ttlReply = float(0)
             ttlRequest = float(0)
-            #source = packet.getSrc().split(".")
-            #dest = packet.getDst().split(".")
-            # If the network is the same add 1
-            #if source[2] == dest[2]:
-            #    numOfHops += float( 128 - float(ttl[1]) + 1)
-            # If the network is not the same add 3
-            #if source[2] != dest[2]:
-            #    numOfHops += float( 128 - float(ttl[1]) + 3)
-            
+    numOfHops += 3
+
     ave = float( numOfHops / count )
     print str(numOfHops) + " , " + str( round(ave, 2) )
 
