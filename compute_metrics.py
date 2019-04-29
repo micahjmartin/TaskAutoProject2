@@ -60,12 +60,16 @@ def computeNode(node, packets):
 
     # Hops / Distance Metrics
     numOfHops = 0
+    count = 0
     for packet in packets:
-        tmp = packet.info.split(',')
-        tmp2 = tmp[2].split(' ')
-        ttl = tmp2[1].split("=")
-        numOfHops += ( 128 - int(ttl[1]) )
-    print numOfHops
+        if packet.isRequest():
+            count += 1
+            tmp = packet.info.split(',')
+            tmp2 = tmp[2].split(' ')
+            ttl = tmp2[1].split("=")
+            numOfHops += ( 128 - int(ttl[1]) )
+    ave = float( numOfHops / count )
+    print str(numOfHops) + " , \t" + str(ave)
 
 
     # TODO: Print out the metrics and calcuate the rest of them
