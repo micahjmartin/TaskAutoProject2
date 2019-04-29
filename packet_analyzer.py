@@ -1,12 +1,28 @@
-from filter_packets import *
-from packet_parser import *
-from compute_metrics import *
+#!/usr/bin/env python
+
+# Task Auto. Project 2
+# Paul Hulbert
+# Jonathan Jang
+# Micah Martin
+
+from filter_packets import filter
+from packet_parser import parse
+from compute_metrics import compute
 
 
-filter()
+# Filter the packets
+filter("data")
+
+# Build arrays for each node
 node1 = []
 node2 = []
 node3 = []
 node4 = []
-parse(node1, node2, node3, node4)  # Parse all of the packet data to per node
+
+# Parse the data
+parse(node1, node2, node3, node4)
+
+# Compute the nodes
 compute(node1, node2, node3, node4)
+
+print("Output saved to output.csv")

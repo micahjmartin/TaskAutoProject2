@@ -1,4 +1,7 @@
-from __future__ import print_function
+# Task Auto. Project 2
+# Paul Hulbert
+# Jonathan Jang
+# Micah Martin
 
 class Icmp(object):
     def __init__(self, data):
@@ -7,8 +10,8 @@ class Icmp(object):
         self.time = float(data[1])
         self.src = data[2] # Source IP
         self.dst = data[3] # Dest IP
-        self.frame_size = int(data[5])
-        self.info = " ".join(data[6:])
+        self.frame_size = int(data[5]) # Size of entire frame
+        self.info = " ".join(data[6:]) # Random info
         # Get the time to live
         self.ttl = float([field.split("=")[-1] for field in data if "ttl=" in field][0])
         self.length = self.frame_size - 42 # Length of the ICMP data
@@ -37,6 +40,7 @@ class Icmp(object):
 
 def parse(node1, node2, node3, node4):
     """Get the packets for each of the nodes"""
+    print("Parsing the files...")
     node1.extend(parse_text_file("data/Node1_filtered.txt"))
     node2.extend(parse_text_file("data/Node2_filtered.txt"))
     node3.extend(parse_text_file("data/Node3_filtered.txt"))

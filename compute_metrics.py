@@ -1,6 +1,11 @@
+# Task Auto. Project 2
+# Paul Hulbert
+# Jonathan Jang
+# Micah Martin
 
 def compute(*nodes):
-    open('data/Output.csv', 'w').close()
+    print("Calculating metrics...")
+    open('output.csv', 'w').close()
     for i in range(1, 5):
         computeNode(i, nodes[i-1])
 
@@ -63,14 +68,14 @@ def computeNode(node, packets):
 
     # Calculate average hops
     hops = []
-    
+
     # Hops for the pings we have recieved
     for i in range(0, EchoRequestsSent):
        hops += [RequestSent[i].ttl - ReplyRec[i].ttl + 1]
 
     AverageHopsPerRequest = round(sum(hops)/len(hops), 2)
 
-    with open("data/Output.csv", 'a') as outfile:
+    with open("output.csv", 'a') as outfile:
         outfile.write("Node " + str(node) + "\n\n")
         outfile.write("Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received\n")
         outfile.write(str(EchoRequestsSent) + "," + str(EchoRequestsRec) + "," + str(EchoReplySent) + "," + str(EchoReplyRec) + "\n")

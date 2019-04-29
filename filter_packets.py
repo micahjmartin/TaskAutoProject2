@@ -1,10 +1,13 @@
-from __future__ import print_function  # Get the real print function
+# Task Auto. Project 2
+# Paul Hulbert
+# Jonathan Jang
+# Micah Martin
 
-
-def filter():
+def filter(directory):
+    print("Filtering the files...")
+    directory = directory.rstrip("/")
     for i in range(1, 5):
-        fil = "data/Node" + str(i) + ".txt"
-        print("Filtering file {}".format(fil))
+        fil = directory + "/Node" + str(i) + ".txt"
         filter_text_file(fil)
 
 def filter_text_file(filename):
