@@ -10,7 +10,7 @@ from packet_parser import parse
 from compute_metrics import compute
 
 
-# Filter the packets
+# Filter the packets located in the "data/" directory
 filter("data")
 
 # Build arrays for each node
