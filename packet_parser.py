@@ -30,6 +30,12 @@ class Icmp(object):
     def getDstNode(self):
         return self._ips.get(self.dst, -1)
     
+    def getSrc(self):
+        return self.src
+    
+    def getDst(self):
+        return self.dst
+    
     def __str__(self):
         return " ".join([str(self.num), str(self.time), self.src, self.dst, str(self.length), self.info])
 

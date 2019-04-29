@@ -68,15 +68,19 @@ def computeNode(node, packets):
             tmp2 = tmp[2].split(' ')
             ttl = tmp2[1].split("=")
 
-            # If the source node is the same as us, we sent it
-            if packet.getSrcNode() == node:
-                numOfHops += float( 128 - float(ttl[1]) + 1)
-            # If the dest node is us, we received it
-            if packet.getDstNode() == node:
-                numOfHops += float( 128 - float(ttl[1]) + 3)
+            source = packet.getSrc().split(".")
+            dest = packet.getDst().split(".")
+            #print source[2] + " , " + dest[2]
+
+            # If the network is the same add 1
+            if source[2] == dest[2]:
+                numOfHops += 1#float( 128 - float(ttl[1]) + 1)
+            # If the network is not the same add 3
+            if source[2] != dest[2]:
+                numOfHops += 3#float( 128 - float(ttl[1]) + 3)
             
     ave = float( numOfHops / count )
-    print str(numOfHops) + " , \t" + str(ave)
+    print str(numOfHops) + " , " + str(ave)
 
 
     # TODO: Print out the metrics and calcuate the rest of them
