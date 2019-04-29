@@ -1,5 +1,6 @@
 
 def compute(*nodes):
+    open('data/Output.csv', 'w').close()
     for i in range(1, 5):
         computeNode(i, nodes[i-1])
 
@@ -60,3 +61,17 @@ def computeNode(node, packets):
 
 
     # TODO: Print out the metrics and calcuate the rest of them
+
+    with open("data/Output.csv", 'a') as outfile:
+        outfile.write("Node " + str(node) + "\n\n")
+        outfile.write("Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received\n")
+        outfile.write(str(EchoRequestsSent) + "," + str(EchoRequestsRec) + "," + str(EchoReplySent) + "," + str(EchoReplyRec) + "\n")
+        outfile.write("Echo Request Bytes Sent (bytes),Echo Request Data Sent (bytes)\n")
+        outfile.write(str(EchoRequestBytesSent) + "," + str(EchoRequestDataSent) + "\n")
+        outfile.write("Echo Request Bytes Received (bytes),Echo Request Data Received (bytes)\n")
+        outfile.write(str(EchoRequestBytesRec) + "," + str(EchoRequestDataRec) + "\n\n")
+        outfile.write("Average RTT (milliseconds)," + str(round(AveragePingRTT, 2)) + "\n")
+        outfile.write("Echo Request Throughput (kB/sec)," + str(round(EchoRequestThroughput, 1)) + "\n")
+        outfile.write("Echo Request Goodput (kB/sec)," + str(round(EchoRequestGoodput, 1)) + "\n")
+        outfile.write("Average Reply Delay (microseconds)," + str(round(AverageReplyDelay, 2)) + "\n\n")
+
