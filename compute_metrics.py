@@ -58,5 +58,14 @@ def computeNode(node, packets):
 
     AverageReplyDelay = totalTimeResponse / EchoRequestsRec * 1000000
 
+    # Hops / Distance Metrics
+    numOfHops = 0
+    for packet in packets:
+        tmp = packet.info.split(',')
+        tmp2 = tmp[2].split(' ')
+        ttl = tmp2[1].split("=")
+        numOfHops += ( 128 - int(ttl[1]) )
+    print numOfHops
+
 
     # TODO: Print out the metrics and calcuate the rest of them
