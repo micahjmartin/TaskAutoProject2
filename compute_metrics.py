@@ -10,6 +10,8 @@ def computeNode(node, packets):
     RequestRec = [] # The req. packets that were rec.
     ReplySent = [] # The reply packets that were sent
     RequestSent = [] # The req. packets that were rec.
+
+    # Sort the packets into the four categories above
     for packet in packets:
         # Handle replies
         if packet.isReply():
@@ -61,12 +63,12 @@ def computeNode(node, packets):
 
     # Calculate average hops
     hops = []
+    
+    # Hops for the pings we have recieved
     for i in range(0, EchoRequestsSent):
-        hops += [RequestSent[i].ttl - ReplyRec[i].ttl + 1]
-    for i in range(0, EchoRequestsRec):
-        hops += [ReplySent[i].ttl - RequestRec[i].ttl + 1]
+       hops += [RequestSent[i].ttl - ReplyRec[i].ttl + 1]
 
-    AverageHopsPerRequest = sum(hops)/len(hops)
+    AverageHopsPerRequest = round(sum(hops)/len(hops), 2)
 
     with open("data/Output.csv", 'a') as outfile:
         outfile.write("Node " + str(node) + "\n\n")
