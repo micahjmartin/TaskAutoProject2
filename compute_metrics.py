@@ -78,7 +78,10 @@ def computeNode(node, packets):
             tmp3 = tmp2[1].split("=")
             ttlReply = float( tmp3[1] )
 
-            numOfHops += (ttlRequest - ttlReply + 1)
+            if ttlRequest < ttlReply:
+                numOfHops += (ttlReply - ttlRequest + 1)
+            else:
+                numOfHops += (ttlRequest - ttlReply + 1)
 
             ttlReply = float(0)
             ttlRequest = float(0)
