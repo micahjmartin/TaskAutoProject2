@@ -35,10 +35,10 @@ class Icmp(object):
 
 def parse(node1, node2, node3, node4):
     """Get the packets for each of the nodes"""
-    node1 = parse_text_file("data/Node1_filtered.txt")
-    node2 = parse_text_file("data/Node2_filtered.txt")
-    node3 = parse_text_file("data/Node3_filtered.txt")
-    node4 = parse_text_file("data/Node4_filtered.txt")
+    node1.extend(parse_text_file("data/Node1_filtered.txt"))
+    node2.extend(parse_text_file("data/Node2_filtered.txt"))
+    node3.extend(parse_text_file("data/Node3_filtered.txt"))
+    node4.extend(parse_text_file("data/Node4_filtered.txt"))
 
 def parse_text_file(filename):
     packets = []
