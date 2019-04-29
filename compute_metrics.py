@@ -61,26 +61,37 @@ def computeNode(node, packets):
     # Hops / Distance Metrics
     numOfHops = float(0)
     count = float(0)
+    ttlReply = float(0)
+    ttlRequest = float(0)
+    
     for packet in packets:
         if packet.isRequest():
+            tmp = packet.info.split(',')
+            tmp2 = tmp[2].split(' ')
+            tmp3 = tmp2[1].split("=")
+            ttlRequest = float( tmp3[1] )
+
+        if packet.isReply():
             count += 1
             tmp = packet.info.split(',')
             tmp2 = tmp[2].split(' ')
-            ttl = tmp2[1].split("=")
+            tmp3 = tmp2[1].split("=")
+            ttlReply = float( tmp3[1] )
 
-            source = packet.getSrc().split(".")
-            dest = packet.getDst().split(".")
-            #print source[2] + " , " + dest[2]
+            numOfHops += (ttlRequest - ttlReply + 1)
 
+            ttlReply = float(0)
+            ttlRequest = float(0)
+            #source = packet.getSrc().split(".")
+            #dest = packet.getDst().split(".")
             # If the network is the same add 1
-            if source[2] == dest[2]:
-                numOfHops += 1#float( 128 - float(ttl[1]) + 1)
+            #if source[2] == dest[2]:
+            #    numOfHops += float( 128 - float(ttl[1]) + 1)
             # If the network is not the same add 3
-            if source[2] != dest[2]:
-                numOfHops += 3#float( 128 - float(ttl[1]) + 3)
+            #if source[2] != dest[2]:
+            #    numOfHops += float( 128 - float(ttl[1]) + 3)
             
     ave = float( numOfHops / count )
     print str(numOfHops) + " , " + str(ave)
-
 
     # TODO: Print out the metrics and calcuate the rest of them
