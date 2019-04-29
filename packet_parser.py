@@ -9,6 +9,8 @@ class Icmp(object):
         self.dst = data[3] # Dest IP
         self.frame_size = int(data[5])
         self.info = " ".join(data[6:])
+        # Get the time to live
+        self.ttl = float([field.split("=")[-1] for field in data if "ttl=" in field][0])
         self.length = self.frame_size - 42 # Length of the ICMP data
 
         self._ips = {

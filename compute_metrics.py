@@ -59,8 +59,14 @@ def computeNode(node, packets):
 
     AverageReplyDelay = totalTimeResponse / EchoRequestsRec * 1000000
 
+    # Calculate average hops
+    hops = []
+    for i in range(0, EchoRequestsSent):
+        hops += [RequestSent[i].ttl - ReplyRec[i].ttl + 1]
+    for i in range(0, EchoRequestsRec):
+        hops += [ReplySent[i].ttl - RequestRec[i].ttl + 1]
 
-    # TODO: Print out the metrics and calcuate the rest of them
+    AverageHopsPerRequest = sum(hops)/len(hops)
 
     with open("data/Output.csv", 'a') as outfile:
         outfile.write("Node " + str(node) + "\n\n")
@@ -73,5 +79,6 @@ def computeNode(node, packets):
         outfile.write("Average RTT (milliseconds)," + str(round(AveragePingRTT, 2)) + "\n")
         outfile.write("Echo Request Throughput (kB/sec)," + str(round(EchoRequestThroughput, 1)) + "\n")
         outfile.write("Echo Request Goodput (kB/sec)," + str(round(EchoRequestGoodput, 1)) + "\n")
-        outfile.write("Average Reply Delay (microseconds)," + str(round(AverageReplyDelay, 2)) + "\n\n")
+        outfile.write("Average Reply Delay (microseconds)," + str(round(AverageReplyDelay, 2)) + "\n")
+        outfile.write("Average Echo Request Hop Count," + str(AverageHopsPerRequest) + "\n\n")
 
